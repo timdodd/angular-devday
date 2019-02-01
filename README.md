@@ -46,7 +46,12 @@ Modify app.component.html
 
 *What is a Component?*
 
-Definition: A component is a directive with a template. There are 3 types of directives, Components, Structural and 
+Definition: A component is a directive with a template. 
+
+There are 3 types of directives: 
+ - Components (directives with a template)
+ - Structural (adds/removes elements from the DOM ie. *ngIf, *ngFor)
+ - Attribute  (change the appearance or behavior of an element, component, or another directive ie. highlighting)
 
 Best Practice: Components normally have element selectors. Element selector should be named in kabab case (w3c). Selectors should be prefixed to avoid name conflicts.
 
@@ -395,5 +400,147 @@ export class XkcdService {
 ```
 
 </p></details>
+
+### Exercise #6 - Services hooking up the details
+
+We now have a summary screen that lists out comics. 
+
+Modify xkcd-list.component.html and xkcd-list.component.ts so we can click on a row and navigate to the XkcdDetailComponent.
+
+
+<details><summary>Answer</summary><p>
+
+file xkcd-list.component.html
+
+```
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let comic of comics">
+  <tr (click)="onSelectComic(comic)">
+    <td>{{comic.num}}</td>
+    <td>{{comic.title}}</td>
+  </tr>
+  </tbody>
+</table>
+
+```
+
+file xkcd-list.component.ts
+
+```
+
+  onSelectComic(comic: Comic) {
+    this.router.navigateByUrl('/xkcd/' + comic.num);
+  }
+
+```
+
+</p></details>
+
+Modify xkcd-detail.component.ts to listen for changes in the ActivatedRoute (so you can read what number is in the URL) and load the appropriate comic.
+
+<details><summary>Answer</summary><p>
+
+
+file xkcd-detail.component.ts
+
+```
+
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {XkcdService} from "../services/xkcd.service";
+import {Comic} from "../models/comic";
+
+@Component({
+  selector: 'app-xkcd-detail',
+  templateUrl: './xkcd-detail.component.html',
+  styleUrls: ['./xkcd-detail.component.css']
+})
+export class XkcdDetailComponent {
+
+  comic: Comic;
+
+  constructor(private route: ActivatedRoute,
+              private xkcdService: XkcdService) {
+    this.route.params.subscribe(params => {
+      this.loadComicById(params['id']);
+    })
+  }
+
+  private loadComicById(id: number): void {
+    this.xkcdService.getComicById(id).subscribe(comic =>
+      this.comic = comic
+    );
+  }
+
+}
+
+```
+
+</p></details>
+
+
+Modify xkcd-detail.component.html display the img
+
+<details><summary>Answer</summary><p>
+
+
+file xkcd-detail.component.html
+
+```
+<img *ngIf="comic" [src]="comic.img">
+
+```
+
+</p></details>
+
+Lets get a little fancy and use a [bootstrap card with a top image](https://getbootstrap.com/docs/4.0/components/card/#example). Also add a 'next' and 'previous' button. Do this through navigation and NOT by just changing the internal component state. It's good practice for hard reloads of your page to display the same results (when it makes sense). 
+
+
+<details><summary>Answer</summary><p>
+
+
+file xkcd-detail.component.html
+
+```
+<div class="card bg-light" *ngIf="comic">
+  <img class="card-img-top" [src]="comic.img">
+  <div class="card-body">
+    <h5 class="card-title">{{comic.title}}</h5>
+    <div class="row">
+      <div class="col text-right">
+        <button type="button" (click)="previous()" class="btn btn-outline-primary mr-2">Prev</button>
+        <button type="button" (click)="next()" class="btn btn-outline-primary">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+
+file xkcd-detail.component.ts
+
+```
+  next() {
+    this.navigate(this.comic.num + 1)
+  }
+
+  previous() {
+    this.navigate(this.comic.num - 1)
+  }
+
+  private navigate(id: number) : void {
+    this.router.navigateByUrl("/xkcd/" + id);
+
+  }
+```
+
+</p></details>
+
 
 
