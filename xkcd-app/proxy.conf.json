@@ -1,0 +1,12 @@
+{
+	"/api": {
+		"target": "https://xkcd.com",
+		"secure": false,
+		"headers": {
+			"Host": "xkcd.com"
+		},
+		"pathRewrite": {
+			"/api": ""
+		}
+	}
+}

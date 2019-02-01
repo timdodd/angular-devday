@@ -8,6 +8,7 @@ import {HeaderTwoComponent} from './header-two/header-two.component';
 import {HeaderThreeComponent} from './header-three/header-three.component';
 import {XkcdListComponent} from "./xkcd-list/xkcd-list.component";
 import {XkcdDetailComponent} from './xkcd-detail/xkcd-detail.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {XkcdDetailComponent} from './xkcd-detail/xkcd-detail.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

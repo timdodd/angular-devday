@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {XkcdService} from "../services/xkcd.service";
+import {Comic} from "../models/comic";
 
 @Component({
   selector: 'app-xkcd-list',
@@ -7,9 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class XkcdListComponent implements OnInit {
 
-  constructor() {
-  }
+  comics: Comic[];
+
+  constructor(private xkcdService: XkcdService) { }
 
   ngOnInit() {
+    this.xkcdService.findComics().subscribe(
+      comics => this.comics = comics
+    );
   }
+
 }
