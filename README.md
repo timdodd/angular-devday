@@ -1,7 +1,6 @@
 # Getting Started With Angular Development
 
-![Angular Logo](./angular.svg)
-
+<img src="./angular.svg" width="100"/>
 
 ### Exercise #1 - Create a new product using the Angular CLI
 
