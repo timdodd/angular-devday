@@ -15,7 +15,31 @@ ng serve
 [Reference - Angular CLI](https://cli.angular.io/)
 
 
+### Exercise #2 - Add bootstrap 4 to you project
 
+Install bootstrap 4
+
+*Note: as of NPM 5 installed modules are added as dependencies by default so the --save is no longer needed.*
+
+```
+npm install bootstrap
+```
+
+And add to styles.css
+```
+@import '~bootstrap/dist/css/bootstrap.min.css';
+```
+
+Modify app.component.html
+
+```
+<div class="container">
+   <h1>xkcd browser</h1>
+   <router-outlet></router-outlet>
+</div>
+```
+
+[Reference - How to add bootstrap 4...](https://loiane.com/2017/08/how-to-add-bootstrap-to-an-angular-cli-project/)
 
 ### Exercise #3 - Creating your first component 3 ways
 
@@ -24,6 +48,8 @@ ng serve
 Definition: A component is a directive with a template. There are 3 types of directives, Components, Structural and 
 
 Best Practice: Components normally have element selectors. Element selector should be named in kabab case (w3c). Selectors should be prefixed to avoid name conflicts.
+
+[Reference - Angular Styleguide](https://angular.io/guide/styleguide)
 
 ```
 good:
@@ -218,7 +244,7 @@ export class AppRoutingModule { }
 Now we're going to create a service and populate a table in the XkcdListComponent. You can look at a sample of the json from the service we will be calling [here](https://xkcd.com/2001/info.0.json).
 Because we're calling a service on the internet on another domain (not localhost) we're going to need to set up our webpack development server to proxy the requests so we don't have CORS issues.
 
-- create file proxy.conf.json (at the same level as your package.json)
+create file proxy.conf.json (at the same level as your package.json)
 
 ```
 {
@@ -236,19 +262,19 @@ Because we're calling a service on the internet on another domain (not localhost
 
 ```
 
-- modify your package.json start commaind
+modify your package.json start commaind
 
 ```
 "start": "ng serve --proxy-config proxy.conf.json",
 ```
-- create a service and a model class
+create a service and a model class
 
 ```
 ng generate service services/xkcd
 ng generate class models/comic
 ```
 
-- import the HttpClientModule into your app.module.ts
+import the HttpClientModule into your app.module.ts
 
 ```
   imports: [
@@ -258,7 +284,7 @@ ng generate class models/comic
   ],
 ```
 
-- Add the fields num, title, img to the Comic class
+Add the fields num, title, img to the Comic class
 
 <details><summary>Answer</summary><p>
 
@@ -274,7 +300,7 @@ export class Comic {
 
 </p></details>
 
-- Add the following methods to the xkcd.service.ts 
+Add the following methods to the xkcd.service.ts 
 
 
 ```
@@ -294,7 +320,7 @@ export class Comic {
 3. As far as I know there isn't a list service so you'll have to forkJoin multiple calls for the list.
 </p></details>
 
-- Add an html table to xkcd-list.component.html and *ngRepeat over a Comic[] and display their id and title.  
+Add an html table to xkcd-list.component.html and *ngRepeat over a Comic[] and display their id and title.  
 
 
 <details><summary>Answer</summary><p>
