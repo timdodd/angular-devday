@@ -6,7 +6,7 @@
   </tr>
   </thead>
   <tbody *ngFor="let comic of comics">
-  <tr>
+  <tr (click)="onSelectComic(comic)">
     <td>{{comic.num}}</td>
     <td>{{comic.title}}</td>
   </tr>

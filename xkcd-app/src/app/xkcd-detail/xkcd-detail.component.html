@@ -1,3 +1,12 @@
-<p>
-  xkcd-detail works!
-</p>
+<div class="card bg-light" *ngIf="comic">
+  <img class="card-img-top" [src]="comic.img">
+  <div class="card-body">
+    <h5 class="card-title">{{comic.title}}</h5>
+    <div class="row">
+      <div class="col text-right">
+        <button type="button" (click)="previous()" class="btn btn-outline-primary mr-2">Prev</button>
+        <button type="button" (click)="next()" class="btn btn-outline-primary">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
