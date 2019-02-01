@@ -1,6 +1,8 @@
 # Getting Started With Angular Development
 
+<p align="center">
 <img src="./angular.svg" width="100"/>
+</p>
 
 ### Exercise #1 - Create a new product using the Angular CLI
 
