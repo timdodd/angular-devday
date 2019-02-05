@@ -76,7 +76,7 @@ bad:
 ```
 
 
-The angular styleguide has an acronym LIFT where the T stands for 'Try to be DRY (don't repeat yourself)'. One was of doing that is creating reusable component. We'll create a header component 3 ways.
+The angular styleguide has an acronym LIFT where the T stands for 'Try to be DRY (don't repeat yourself)'. One way of doing that is creating reusable component. We'll create a header component 3 ways.
 
 
 ### Exercise #3a - Component with input
@@ -248,7 +248,7 @@ export class AppRoutingModule { }
 ### Exercise #5 - Services
 
 Now we're going to create a service and populate a table in the XkcdListComponent. You can look at a sample of the json from the service we will be calling [here](https://xkcd.com/2001/info.0.json).
-Because we're calling a service on the internet on another domain (not localhost) we're going to need to set up our webpack development server to proxy the requests so we don't have CORS issues.
+Because we're calling a service on the internet on another domain (not localhost) we're going to need to set up our webpack development server to proxy the requests so we don't have [CORS issues](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).
 
 create file proxy.conf.json (at the same level as your package.json)
 
@@ -268,7 +268,7 @@ create file proxy.conf.json (at the same level as your package.json)
 
 ```
 
-modify your package.json start commaind
+modify your package.json start command
 
 ```
 "start": "ng serve --proxy-config proxy.conf.json",
@@ -326,7 +326,7 @@ Add the following methods to the xkcd.service.ts
 3. As far as I know there isn't a list service so you'll have to forkJoin multiple calls for the list.
 </p></details>
 
-Add an html table to xkcd-list.component.html and *ngRepeat over a Comic[] and display their id and title.  
+Add an html table to xkcd-list.component.html and *ngFor over a Comic[] and display their id and title.  
 
 
 <details><summary>Answer</summary><p>
