@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {forkJoin, Observable} from "rxjs";
-import {Comic} from "../models/comic";
+import {HttpClient} from '@angular/common/http';
+import {forkJoin, Observable} from 'rxjs';
+import {Comic} from '../models/comic';
 
 @Injectable({
   providedIn: 'root'

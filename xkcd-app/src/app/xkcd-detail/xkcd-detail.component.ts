@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {XkcdService} from "../services/xkcd.service";
-import {Comic} from "../models/comic";
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {XkcdService} from '../services/xkcd.service';
+import {Comic} from '../models/comic';
 
 @Component({
   selector: 'app-xkcd-detail',
@@ -16,20 +16,20 @@ export class XkcdDetailComponent {
               private router: Router,
               private xkcdService: XkcdService) {
     this.route.params.subscribe(params => {
-      this.loadComicById(params['id']);
-    })
+      this.loadComicById(params.id);
+    });
   }
 
   next() {
-    this.navigate(this.comic.num + 1)
+    this.navigate(this.comic.num + 1);
   }
 
   previous() {
-    this.navigate(this.comic.num - 1)
+    this.navigate(this.comic.num - 1);
   }
 
-  private navigate(id: id) : void {
-    this.router.navigateByUrl("/xkcd/" + id);
+  private navigate(id: number): void {
+    this.router.navigateByUrl('/xkcd/' + id);
 
   }
 

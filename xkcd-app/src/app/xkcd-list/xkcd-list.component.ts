@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {XkcdService} from "../services/xkcd.service";
-import {Comic} from "../models/comic";
-import {Router} from "@angular/router";
+import {XkcdService} from '../services/xkcd.service';
+import {Comic} from '../models/comic';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-xkcd-list',
