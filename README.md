@@ -5,7 +5,7 @@
 </p>
 
 
-Like to see the puzzle before you get started? [This is what we're building](https://timdodd.github.io/angular-devday/xkcd).
+Like to see the puzzle before you get started? [This is what we're building](https://timdodd.github.io/angular-devday).
 
 ### Exercise #1 - Create a new product using the Angular CLI
 
