@@ -1,0 +1,16 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let comic of comics">
+    <tr>
+      <td>{{comic.id}}</td>
+      <td>{{comic.title}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
