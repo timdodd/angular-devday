@@ -4,6 +4,9 @@
 <img src="./angular.svg" width="100"/>
 </p>
 
+
+Like to see the puzzle before you get started? [This is what we're building](https://timdodd.github.io/angular-devday/xkcd).
+
 ### Exercise #1 - Create a new product using the Angular CLI
 
 ```
@@ -76,7 +79,7 @@ bad:
 ```
 
 
-The angular styleguide has an acronym LIFT where the T stands for 'Try to be DRY (don't repeat yourself)'. One was of doing that is creating reusable component. We'll create a header component 3 ways.
+Let's start by creating a header component 3 ways. Throughout these exercises you can also refer to the [Angular Cheetsheet](https://angular.io/guide/cheatsheet)
 
 
 ### Exercise #3a - Component with input
@@ -543,4 +546,96 @@ file xkcd-detail.component.ts
 </p></details>
 
 
+### Exercise #7 - A basic intro to the forms module
 
+Let's flip back to the summary page and add an input in the header of the table to filter the results as we type. There are two ways of doing forms in angular - template-driven and reactive forms. For today we'll just cover template-driven (ngModel) which is what we're used to from angularJS.
+
+1. import the FormsModule into your app.module.ts
+2. in xkcd-list.component.ts add a string to store the filter value into and a function to do the filtering.
+3. in xkcd-list.component.html add an input to the table header
+    - add an two way binding [(ngModel)] to the input to set the filter value
+    - add an (keyup) event binding to call the filter method on key up.
+    
+
+<details><summary>Answer</summary><p>
+
+
+file xkcd-list.component.html
+
+```
+...
+  <tr>
+    <th colspan="2">
+      <input placeholder="Search for a comic..." class="form-control" [(ngModel)]="filter" (keyup)="onChangeFilter()">
+    </th>
+  </tr>
+...
+```
+
+
+file xkcd-list.component.ts
+
+```
+import {Component, OnInit} from '@angular/core';
+import {XkcdService} from '../services/xkcd.service';
+import {Comic} from '../models/comic';
+import {Router} from '@angular/router';
+
+@Component({
+  selector: 'app-xkcd-list',
+  templateUrl: './xkcd-list.component.html',
+  styleUrls: ['./xkcd-list.component.css']
+})
+export class XkcdListComponent implements OnInit {
+
+  private comics: Comic[] = [];
+  filteredComics: Comic[] = [];
+  filter: string;
+
+  constructor(private xkcdService: XkcdService,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    this.xkcdService.findComics().subscribe(
+      comics => {
+        this.comics = comics;
+        this.filterComics();
+      });
+  }
+
+  onChangeFilter() {
+    this.filterComics();
+  }
+
+  onSelectComic(comic: Comic) {
+    this.router.navigateByUrl('/xkcd/' + comic.num);
+  }
+
+  private filterComics(): void {
+    if (!this.filter) {
+      this.filteredComics = this.comics;
+    } else {
+      this.filteredComics = this.comics.filter(comic => comic.title.toLowerCase().includes(this.filter.toLowerCase()));
+    }
+  }
+
+}
+  
+```
+
+</p></details>
+
+
+Bonus Round. Angular enforces unidirectional data flow (data down events up) so a two way binding is really just syntaxtic sugar around the following:
+
+```
+//an attribute binding on ngModel and an event binding on ngModelChange
+<input class="form-control" [ngModel]="filter" (ngModelChange)="filter=$event">
+
+//which means alternatively we can write the functionality as:
+<input placeholder="Search for a comic..." class="form-control" [ngModel]="filter" (ngModelChange)="filter=$event; onChangeFilter()">
+
+```
+
+### -- The End -- 
