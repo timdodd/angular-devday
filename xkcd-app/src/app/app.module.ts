@@ -9,6 +9,7 @@ import {HeaderThreeComponent} from './header-three/header-three.component';
 import {XkcdListComponent} from './xkcd-list/xkcd-list.component';
 import {XkcdDetailComponent} from './xkcd-detail/xkcd-detail.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,17 @@
+
 <table class="table table-bordered table-hover">
   <thead>
+  <tr>
+    <th colspan="2">
+      <input placeholder="Search for a comic..." class="form-control" [(ngModel)]="filter" (keyup)="onChangeFilter()">
+    </th>
+  </tr>
   <tr>
     <th>Id</th>
     <th>Title</th>
   </tr>
   </thead>
-  <tbody *ngFor="let comic of comics">
+  <tbody *ngFor="let comic of filteredComics">
   <tr (click)="onSelectComic(comic)">
     <td>{{comic.num}}</td>
     <td>{{comic.title}}</td>
